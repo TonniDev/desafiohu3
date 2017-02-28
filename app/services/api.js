@@ -42,6 +42,7 @@ module.exports = function(){
 
                 //Loop through hotels to find selected hotel
                 for(let i = 0; i < departuresList.length; i++){
+                    //Transform hotel names into a readable machine name
                     let lookupkey = departuresList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\s|\(|\)|\W+/g, '-').replace(/\W{2,}/g, '-').replace(/\W$/g, '');
                     //When hotel is found...
                     if(lookupkey === hotel){
@@ -62,9 +63,8 @@ module.exports = function(){
                 departures = departures.sort();
                 //Creates cache of departures
                 cached.departures.set(hotel, departures);
+                return departures;
             }
-            return departures;
-
         } catch(err){
             console.error(err);
             throw err;
@@ -93,7 +93,7 @@ module.exports = function(){
 
                 //Loop through hotels to find selected hotel
                 for(let i = 0; i < dailysList.length; i++){
-
+                    //Transform hotel names into a readable machine name
                     let lookupkey = dailysList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\s|\(|\)|\W+/g, '-').replace(/\W{2,}/g, '-').replace(/\W$/g, '');
 
                     //When hotel is found...
@@ -114,9 +114,73 @@ module.exports = function(){
                 dailys = dailys.sort(function(first, last){return first-last});
                 //Creates cache
                 cached.dailys.set(hotel, dailys);
+                return dailys;
             }
-            return dailys;
         } catch(err){
+            console.error(err);
+            throw err;
+        }
+    };
+
+    services.getOptions = function(name, filters){
+        try{
+
+            //Creates emtpy array for inputing data
+            let options = [];
+
+            //Assign parameter to variable
+            let hotel = name;
+            let searchTerms = filters;
+            let departure = '';
+            let daily = '';
+
+            if(Object.keys(searchTerms).length > 0){
+                departure = searchTerms.from;
+                daily = searchTerms.daily;
+            }
+            //Creates filter methods for departures an dailys
+            const departureFilter = (options)=>{
+                //New ES6 method includes() for filtering array
+                return options.from.includes(departure);
+            };
+            const dailyFilter = (options)=>{
+                return options.daily == daily;
+            };
+
+            //Creates custom string for caching different parameters combination
+            let cachedString = hotel + searchTerms.from + searchTerms.daily;
+            let cachedOptions = cached.options.get(cachedString);
+
+            if(cachedOptions){
+                options = cachedOptions;
+                return options;
+            }else{
+                //Parse hotels into a JSON object
+                let optionsList = JSON.parse(hotels);
+
+                //Loop through hotels to find selected hotel
+                for(let i = 0; i < optionsList.length; i++){
+                    //Transform hotel names into a readable machine name
+                    let lookupkey = optionsList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\s|\(|\)|\W+/g, '-').replace(/\W{2,}/g, '-').replace(/\W$/g, '');
+
+                    //When hotel is found...
+                    if (lookupkey === hotel) {
+                        //...get its options
+                        options = optionsList[i].options;
+                        //If any search term is applied, filter options
+                        if (searchTerms.from) {
+                            options = options.filter(departureFilter);
+                        }
+                        if (searchTerms.daily) {
+                            options = options.filter(dailyFilter);
+                        }
+                    }
+                }
+                //Creates cache for options
+                cached.options.set(cachedString, options);
+                return options;
+            }
+        }catch(err){
             console.error(err);
             throw err;
         }

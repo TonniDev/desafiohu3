@@ -60,5 +60,15 @@ module.exports = (app)=>{
         }
     };
 
+    controllers.listOptions = function(req, res){
+        //Retrieve list of options
+        let items = service.getOptions(req.params._name, req.body);
+
+        //Write log for the request and response
+        util.writeLog(req, res, 'options-api');
+
+        res.json(items);
+    };
+
     return controllers;
 };

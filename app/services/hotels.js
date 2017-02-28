@@ -59,8 +59,8 @@ module.exports = function(){
                 }
                 //If cache dosn't exist, let's create it
                 cached.hotels.set('hotels', names);
+                return names;
             }
-            return names;
         }catch(err){
             console.error(err);
             throw err;
@@ -94,8 +94,8 @@ module.exports = function(){
                 }
                 //Creates cache for this hotel
                 cached.details.set(name, details);
+                return details;
             }
-            return details;
         }catch(err){
             console.error(err);
             throw err;
