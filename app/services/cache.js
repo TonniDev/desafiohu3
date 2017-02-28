@@ -13,6 +13,8 @@ const nodeCache = require('node-cache');
 
 const hotelsCache = new nodeCache({useClones:true, stdTTL: 60, checkperiod: 600});
 const detailsCache = new nodeCache({useClones:true, stdTTL: 60, checkperiod: 600});
+const departuresCache = new nodeCache({useClones:true, stdTTL: 60, checkperiod: 600});
 
 exports.hotels = hotelsCache;
 exports.details = detailsCache;
+exports.departures = departuresCache;
