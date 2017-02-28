@@ -1,0 +1,16 @@
+{{#extend "stylesheets"}}
+
+{{/extend}}
+
+{{#each hotel}}
+    <div class="text">
+        <h2>{{title}}</h2>
+        {{#each photos}}
+            <img src="/{{this}}" alt="">
+        {{/each}}
+    </div>
+{{/each}}
+
+{{#extend "scripts"}}
+
+{{/extend}}

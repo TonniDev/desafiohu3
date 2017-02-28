@@ -33,7 +33,6 @@ module.exports = function(){
                 names = cachedItems;
                 return names;
             } else {
-
                 //Parse hotels into a JSON object
                 let hotelList = JSON.parse(hotels);
 
@@ -42,7 +41,7 @@ module.exports = function(){
                 for (let i = 0; i < hotelList.length; i++) {
                     count++;
                     //Transform hotel names into a readable machine name
-                    let lookupkey = hotelList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\$/g, 's').replace(/\s\|\(|\)|\W+/g, '-').replace(/\W{2}/g, '-').replace(/\W$/g, '');
+                    let lookupkey = hotelList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\$/g, 's').replace(/\s|\(|\)|\W+/g, '-').replace(/\W{2,}/g, '-').replace(/\W$/g, '');
                     //Assing each item to a variable
                     let data = hotelList[i];
                     //Insert keu 'url' to object
@@ -62,6 +61,41 @@ module.exports = function(){
                 cached.hotels.set('hotels', names);
             }
             return names;
+        }catch(err){
+            console.error(err);
+            throw err;
+        }
+    };
+
+    services.hotelDetails = function(name){
+        try{
+            //Creates empty array for inputing the hotel details
+            let details = [];
+            //Get cached details
+            let cachedDetails = cached.details.get(name);
+            //Check if cache exists
+            if(cachedDetails){
+                details = cachedDetails;
+                return details;
+            }else{
+                //Parse hotels into a JSON object
+                let hotelList = JSON.parse(hotels);
+
+                let count = 0;
+                //Loop through hotels
+                for (let i = 0; i < hotelList.length; i++) {
+                    count++;
+                    //Transform hotel names into a readable machine name
+                    let lookupkey = hotelList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\$/g, 's').replace(/\s|\(|\)|\W+/g, '-').replace(/\W{2,}/g, '-').replace(/\W$/g, '');
+                    //When hotel is found, return its details
+                    if (lookupkey === name) {
+                        details = hotelList[i];
+                    }
+                }
+                //Creates cache for this hotel
+                cached.details.set(name, details);
+            }
+            return details;
         }catch(err){
             console.error(err);
             throw err;
