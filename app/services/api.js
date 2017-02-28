@@ -52,7 +52,7 @@ module.exports = function(){
                         }
                     }
                 }
-                //Reduce to asingle arrays instead of an array of arrays
+                //Reduce to a single array instead of an array of arrays
                 departures = departures.reduce(function(prev, curr){
                     return prev.concat(curr);
                 }, []);
@@ -70,5 +70,57 @@ module.exports = function(){
             throw err;
         }
     };
+
+    //Return the list of dailys on selected hotel
+    services.getDailys = (name)=>{
+        try{
+
+            //Creates empty array to receive data
+            let dailys = [];
+
+            //Assign parameter name to variable
+            let hotel = name;
+
+            //Retrieves cached dailys
+            let cachedDailys = cached.dailys.get(hotel);
+
+            if(cachedDailys){
+                dailys = cachedDailys;
+                return dailys;
+            }else{
+                //Parse hotels into a JSON object
+                let dailysList = JSON.parse(hotels);
+
+                //Loop through hotels to find selected hotel
+                for(let i = 0; i < dailysList.length; i++){
+
+                    let lookupkey = dailysList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\s|\(|\)|\W+/g, '-').replace(/\W{2,}/g, '-').replace(/\W$/g, '');
+
+                    //When hotel is found...
+                    if(lookupkey === hotel){
+                        //...loop through options to get its dailys
+                        for(let j = 0; j < dailysList[i].options.length; j++){
+                            dailys.push(dailysList[i].options[j].daily);
+                        }
+                    }
+                }
+                //Reduce to a single array instead of an array of arrays
+                dailys = dailys.reduce(function(prev, curr){
+                    return prev.concat(curr);
+                }, []);
+                //Remove duplicates
+                dailys = unique(dailys);
+                //Sort ascending
+                dailys = dailys.sort(function(first, last){return first-last});
+                //Creates cache
+                cached.dailys.set(hotel, dailys);
+            }
+            return dailys;
+        } catch(err){
+            console.error(err);
+            throw err;
+        }
+    };
+
     return services;
 };

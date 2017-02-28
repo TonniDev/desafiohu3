@@ -27,7 +27,7 @@ module.exports = (app)=>{
         let items = service.getDepartures(req.params._name);
 
         //Write log for request and response
-        util.writeLog(req, res, 'api');
+        util.writeLog(req, res, 'departures-api');
 
         //Accepts only ajax requests
         if(req.xhr){
@@ -40,5 +40,25 @@ module.exports = (app)=>{
             res.render('error', {error: error});
         }
     };
+
+    controllers.listDailys = function(req, res){
+        //Retrieves list of dailys
+        let items = service.getDailys(req.params._name);
+
+        //Write log for the request and response
+        util.writeLog(req, res, 'daily-api');
+
+        //Accepts only ajax requests
+        if(req.xhr){
+            res.json(items);
+        }else{
+            res.status(403);
+            let error = {};
+            error.status = 403;
+            error.message = 'Acces forbidden';
+            res.render('error', {error: error});
+        }
+    };
+
     return controllers;
 };

@@ -18,4 +18,8 @@ module.exports = (app)=>{
     //Set route to retrieve departures for the selected hotel
     app.route('/api/departures/(:_name)')
         .get(controller.listDepartures);
+
+    //Set route to retriev dailys for the selected hotel
+    app.route('/api/dailys/(:_name)')
+        .get(controller.listDailys);
 };
