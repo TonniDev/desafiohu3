@@ -11,6 +11,7 @@
 'use strict';
 
 const fs = require('fs');
+const cached = require('./cache');
 
 module.exports = function(){
     //Read list of hotels from static database
@@ -24,32 +25,43 @@ module.exports = function(){
             //Creates empty array for inputing final list
             let names = [];
 
-            //Parse hotels into a JSON object
-            let hotelList = JSON.parse(hotels);
+            //Get cached items
+            let cachedItems = cached.hotels.get('hotels');
 
-            let count = 0;
-            //Loop through hotels
-            for(let i = 0; i < hotelList.length; i++){
-                count++;
-                //Transform hotel names into a readable machine name
-                let lookupkey = hotelList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\$/g, 's').replace(/\s\|\(|\)|\W+/g, '-').replace(/\W{2}/g, '-').replace(/\W$/g, '');
-                //Assing each item to a variable
-                let data = hotelList[i];
-                //Insert keu 'url' to object
-                data.url = lookupkey;
-                //Push object into final list
-                names.push({
-                    title: hotelList[i].title,
-                    image: 'images/photo' + count + '.jpg',
-                    url: data.url,
-                    number: i
-                });
-                if(count === 12){
-                    count = 0;
+            //Check if cache exists
+            if(cachedItems){
+                names = cachedItems;
+                return names;
+            } else {
+
+                //Parse hotels into a JSON object
+                let hotelList = JSON.parse(hotels);
+
+                let count = 0;
+                //Loop through hotels
+                for (let i = 0; i < hotelList.length; i++) {
+                    count++;
+                    //Transform hotel names into a readable machine name
+                    let lookupkey = hotelList[i].title.toLowerCase().replace(/\u0026/g, 'and').replace(/\$/g, 's').replace(/\s\|\(|\)|\W+/g, '-').replace(/\W{2}/g, '-').replace(/\W$/g, '');
+                    //Assing each item to a variable
+                    let data = hotelList[i];
+                    //Insert keu 'url' to object
+                    data.url = lookupkey;
+                    //Push object into final list
+                    names.push({
+                        title: hotelList[i].title,
+                        image: 'images/photo' + count + '.jpg',
+                        url: data.url,
+                        number: i
+                    });
+                    if (count === 12) {
+                        count = 0;
+                    }
                 }
+                //If cache dosn't exist, let's create it
+                cached.hotels.set('hotels', names);
             }
             return names;
-
         }catch(err){
             console.error(err);
             throw err;

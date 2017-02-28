@@ -50,6 +50,8 @@ fabric.properties
 # Logs
 logs
 #*.log
+.log/*
+!.log/.gitkeep
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
