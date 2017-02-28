@@ -1,0 +1,56 @@
+/**
+ *.@license-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ *.._______                _ _____
+ *.|__   __|              (_)  __ \  Created by
+ *....| | ___  _ __  _ __  _| |  | | _____   __
+ *....| |/ _ \| '_ \| '_ \| | |  | |/ _ \ \ / /
+ *....| | (_) | | | | | | | | |__| |  __/\ V /
+ *....|_|\___/|_| |_|_| |_|_|_____/ \___| \_/ v1.0
+ *28/02/17 :: 18:38-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+ */
+@import "common/typography";
+@import "common/utilities";
+@import "common/colors";
+html{
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin: 0;
+  padding: 0;
+}
+.gridlock {
+  width: 100%;
+  max-width: 700px;
+  position: relative;
+  margin: 0 auto;
+  padding: 0 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  @media @screen-tablet{
+    max-width: 960px;
+  }
+  @media @screen-desktop{
+    max-width: 1280px;
+  }
+  @media @screen-desktop-large{
+    max-width: 1440px;
+  }
+}
+.hidden{
+  display: none;
+}
+
+.header{
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: @color-fun-blue;
+  img.logo{
+    display: block;
+    margin: 0 auto;
+    padding: 15px 0;
+  }
+}

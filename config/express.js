@@ -43,7 +43,7 @@ module.exports = function(){
     app.set('port', port);
 
     //Compiles LESS to CSS
-    app.use(require('less-middleware')('./public/assets', {debug: false}));
+    app.use(require('less-middleware')('./public/assets', {force: true, debug: true}));
     app.use(express.static('./public/assets'));
 
     //Set views

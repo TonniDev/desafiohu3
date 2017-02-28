@@ -1,35 +1,11 @@
 {{#extend "stylesheets"}}
-    <style>
-        .hotels-wrap{
-            display: block;
-            width: 100%;
-            max-width: 1200px;
-            text-align: center;
-            margin: 0 auto;
-        }
-        .hotels{
-            display: inline-block;
-            width: 250px;
-            height: 150px;
-            text-align: left;
-            margin: 15px;
-            padding: 20px;
-            vertical-align: top;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/index.css">
 {{/extend}}
-
-<h1>Hotel Urbano</h1>
 
 <div class="hotels-wrap">
     {{#each items}}
         <a href="/hotel/{{url}}" class="hotels" style="background-image: url('/{{image}}')">
-            <p>{{title}}</p>
+            <p><span>{{title}}</span></p>
         </a>
     {{/each}}
 </div>

@@ -1,0 +1,26 @@
+/**
+ *.@license-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ *.._______                _ _____
+ *.|__   __|              (_)  __ \  Created by
+ *....| | ___  _ __  _ __  _| |  | | _____   __
+ *....| |/ _ \| '_ \| '_ \| | |  | |/ _ \ \ / /
+ *....| | (_) | | | | | | | | |__| |  __/\ V /
+ *....|_|\___/|_| |_|_| |_|_|_____/ \___| \_/ v1.0
+ *28/02/17 :: 18:36-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+ */
+@screen-mobile: ~"only screen and (max-width: 767px)";
+@screen-tablet: ~"only screen and (min-width: 768px) and (max-width: 1040px)";
+@screen-mobile-and-tablet: ~"only screen and (max-width: 1040px)";
+@screen-tablet-and-desktop: ~"only screen and (min-width: 768px)";
+@screen-desktop: ~"only screen and (min-width: 1040px)";
+@screen-desktop-large: ~"only screen and (min-width: 1410px)";
+
+@root-font-size:16;
+.font-size(@sizeValue) {
+@remValue: @sizeValue/@root-font-size;
+    font-size: ~"@{remValue}rem";
+}
+.line-height(@sizeValue){
+@remValue: @sizeValue/@root-font-size;
+    line-height: ~"@{remValue}rem";
+}
