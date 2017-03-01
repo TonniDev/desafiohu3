@@ -34,7 +34,7 @@ module.exports = function(){
             let cachedDepartures = cached.departures.get(hotel);
 
             if(cachedDepartures){
-                departures - cachedDepartures;
+                departures = cachedDepartures;
                 return departures;
             } else {
                 //Parse hotels into a JSON object
@@ -152,6 +152,7 @@ module.exports = function(){
             let cachedOptions = cached.options.get(cachedString);
 
             if(cachedOptions){
+                console.log('cached');
                 options = cachedOptions;
                 return options;
             }else{

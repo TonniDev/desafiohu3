@@ -22,6 +22,11 @@ const extend = require('handlebars-extend-block');
 let handlebars = require('hbs');
 handlebars = extend(handlebars);
 
+handlebars.registerHelper('currency', function(number){
+    var val = number.toString();
+    return val.replace(/\B(?=(\d{3})+(?!\d))/g, ".");;
+});
+
 //Normalize port coming from number or string
 function normalizePort(val){
     let port = parseInt(val, 10);

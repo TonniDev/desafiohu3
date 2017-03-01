@@ -9,14 +9,19 @@
  *28/02/17 :: 20:16-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
  */
 "use strict";
-var Hotel = {
+
+function Hotel(){
+    console.log('init Hotel');
+    return
+};
+
+Hotel.prototype = {
     setPhotoGallery: function(){
         try{
             jQuery('.thumb').css({
                 'width': 'calc(' + (100 / (jQuery('.thumb').length)) + '% - 10px'
             });
             var image = jQuery('.thumb:first').attr('href');
-            console.log(image);
             jQuery('.photo').css({
                 'background-image': 'url("' + image + '")'
             });
@@ -51,7 +56,6 @@ var Hotel = {
                     if(prev.length <= 0){
                         return false;
                     }
-                    console.log(prev);
                     var prev_image = jQuery('.thumb.active').prev().attr('href');
                     jQuery('.photo').fadeOut('fast', function(){
                         jQuery(this).css({
@@ -69,7 +73,6 @@ var Hotel = {
                     if(next.length <= 0){
                         return false;
                     }
-                    console.log(next);
                     var next_image = jQuery('.thumb.active').next().attr('href');
                     jQuery('.photo').fadeOut('fast', function(){
                         jQuery(this).css({
@@ -91,6 +94,9 @@ var Hotel = {
         try{
             var hotel = window.location.pathname.split('/')[2];
 
+            jQuery(window).on('load', function(){
+                console.log('haha');
+            });
             //Get departures list
             var departures = jQuery.ajax({
                 method: "GET",
@@ -98,7 +104,6 @@ var Hotel = {
                 dataType: "json"
             });
             departures.done(function( data ) {
-                console.log(data);
                 var dados = data;
                 for(var i = 0; i < dados.length; i++){
                     jQuery('#departures').append('<option value="' + dados[i] + '">' + dados[i] + "</option>");
@@ -111,7 +116,6 @@ var Hotel = {
                 dataType: "json"
             });
             dailys.done(function( data ) {
-                console.log(data);
                 var dados = data;
                 for(var i = 0; i < dados.length; i++){
                     jQuery('#dailys').append('<option value="' + dados[i] + '">' + dados[i] + "</option>");
@@ -121,13 +125,29 @@ var Hotel = {
             console.error(err);
         }
     },
+    setExtras: function(){
+        try{
+            jQuery('.tag').each(function(){
+                if(jQuery(this).html().indexOf('Tarifa') >= 0){
+                    jQuery(this).addClass('tarifa');
+                }
+                if(jQuery(this).html().indexOf('Cancelamento') >= 0){
+                    jQuery(this).addClass('cancelamento');
+                }
+            });
+        }catch(err){
+            console.error(err);
+        }
+    },
     init: function(){
-        Hotel.setPhotoGallery();
-        Hotel.setThumbsClick();
-        Hotel.getOptionsFilters();
+        this.setPhotoGallery();
+        this.setThumbsClick();
+        this.getOptionsFilters();
+        this.setExtras();
     }
 };
 
 jQuery(document).ready(function(){
-    Hotel.init();
+    var hotel = new Hotel();
+    hotel.init();
 });

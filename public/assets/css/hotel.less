@@ -47,11 +47,12 @@ h3{
   height: 230px;
   margin: 20px auto;
   position: relative;
+  -webkit-border-radius: 3px;
+  -moz-border-radius:3px;
+  border-radius: 3px;
+  overflow: hidden;
   @media @screen-tablet-and-desktop{
     height: 370px;
-  }
-  @media @screen-desktop{
-    height: 550px;
   }
 
   .photo{
@@ -72,9 +73,6 @@ h3{
   text-align: center;
   @media @screen-tablet-and-desktop{
     display: block;
-  }
-  @media @screen-desktop{
-    height: 100px;
   }
 
   .thumb{
@@ -156,4 +154,333 @@ h3{
   background-color: rgba(0, 0, 0, 0.5);
   right: 0px;
   left: auto;
+}
+
+.filters{
+  display: block;
+  width: 100%;
+  margin: 40px 0 40px 0;
+  padding: 0;
+  overflow: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  @media @screen-tablet-and-desktop{
+    border-bottom: 1px solid @color-mercury;
+    margin: 80px 0 40px 0;
+  }
+  p{
+    display: block;
+    font-family: 'Gotham', sans-serif;
+    font-weight: 700;
+    .font-size(24);
+    color: @color-mine-shaft;
+    text-transform: uppercase;
+    margin: 0;
+    @media @screen-tablet-and-desktop{
+      float: left;
+      .font-size(19);
+      .line-height(56);
+    }
+    @media @screen-desktop{
+      .font-size(24);
+      .line-height(49);
+    }
+  }
+  #options-filter{
+    display: block;
+    @media @screen-tablet-and-desktop{
+      float: right;
+    }
+    div{
+      display: inline-block;
+      width: 100%;
+      max-width: 400px;
+      vertical-align: middle;
+      font-family: 'Gotham', sans-serif;
+      font-weight: 300;
+      text-transform: uppercase;
+      color: @color-mine-shaft;
+      margin: 10px 0;
+      @media @screen-tablet-and-desktop{
+        width: auto;
+      }
+      label{
+        display: inline-block;
+        .font-size(12);
+      }
+      select{
+        display: inline-block;
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid @color-silver;
+        padding: 7px 15px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.17);
+        -moz-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.17);
+        box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.17);
+        background-image: url('../images/select.png');
+        background-position: 100% center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        -webkit-padding-end: 40px;
+        -webkit-padding-start: 10px;
+        -webkit-user-select: none;
+        -webkit-appearance: button;
+        @media @screen-tablet-and-desktop{
+          width: auto;
+          margin: 0 5px 0 0;
+        }
+        &#departures{
+          @media @screen-tablet-and-desktop{
+            min-width: 170px;
+            margin: 0 30px 0 0;
+          }
+        }
+
+        &:focus{
+          outline: none;
+        }
+        option{
+          font-family: 'Gotham', sans-serif;
+        }
+      }
+    }
+  }
+}
+
+#options{
+  display: block;
+  width: 100%;
+  height: auto;
+
+  .option{
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    min-height: 200px;
+    margin: 20px auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid @color-silver;
+
+    @media @screen-tablet-and-desktop{
+      max-width: 940px;
+      height: 200px;
+    }
+
+    &:hover{
+      @media @screen-desktop{
+        border: 1px solid @color-flush-orange;
+      }
+    }
+
+    div{
+      padding: 20px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .main-info{
+      display: block;
+      border-bottom: 1px solid @color-silver;
+
+      @media @screen-tablet-and-desktop{
+        display: inline-block;
+        width: 35%;
+        height: 100%;
+        vertical-align: top;
+        border-bottom: none;
+        border-right: 1px solid @color-silver;
+      }
+      @media @screen-desktop{
+        max-width: 390px;
+        width: 45%;
+      }
+
+      h2{
+        font-family: 'Gotham', sans-serif;
+        font-weight: 400;
+        color: @color-mine-shaft;
+        .font-size(16);
+      }
+      p{
+        font-family: 'Gotham', sans-serif;
+        font-weight: 300;
+        color: @color-scorpion;
+        .font-size(15);
+        margin: 10px 0;
+      }
+    }
+    .departures-info{
+      display: block;
+      border-bottom: 1px solid @color-silver;
+      overflow: auto;
+
+      @media @screen-tablet-and-desktop{
+        display: inline-block;
+        width: 15%;
+        height: 100%;
+        vertical-align: top;
+        border-bottom: none;
+        border-right: 1px solid @color-silver;
+      }
+      @media @screen-desktop{
+        min-width: 145px;
+      }
+
+      h3{
+        display: block;
+        float: left;
+        font-family: 'Gotham', sans-serif;
+        font-weight: 700;
+        color: @color-mine-shaft;
+        .font-size(16);
+        margin: 5px 0;
+        @media @screen-tablet-and-desktop{
+          float: none;
+        }
+      }
+      ul{
+        display: block;
+        float: right;
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+        position: relative;
+        right: 0;
+        @media @screen-tablet-and-desktop{
+          float: none;
+        }
+        li{
+          list-style-type: none;
+          font-family: 'Gotham', sans-serif;
+          font-weight: 300;
+          color: @color-scorpion;
+          .font-size(15);
+        }
+      }
+    }
+    .package{
+      display: block;
+      padding: 10px 20px;
+      text-align: center;
+      border-bottom: 1px solid @color-silver;
+
+      @media @screen-tablet-and-desktop{
+        display: inline-block;
+        width: 15%;
+        height: 100%;
+        vertical-align: top;
+        border-bottom: none;
+        border-right: 1px solid @color-silver;
+        padding: 20px;
+      }
+      @media @screen-desktop{
+        min-width: 145px;
+      }
+
+      p{
+        display: inline-block;
+        width: 70px;
+        font-family: 'Gotham', sans-serif;
+        font-weight: 700;
+        color: @color-mine-shaft;
+        .font-size(20);
+        text-align: center;
+        margin: 0 auto;
+
+        &:last-child{
+          @media @screen-tablet-and-desktop{
+
+          }
+          &:before{
+            @media @screen-tablet-and-desktop{
+              content: '';
+              display: block;
+              width: 15px;
+              height: 1px;
+              background-color: @color-scorpion;
+              margin: 20px auto;
+            }
+          }
+        }
+        img{
+          display: inline-block;
+          vertical-align: bottom;
+        }
+        span{
+          display: block;
+          font-family: 'Gotham', sans-serif;
+          font-weight: 300;
+          color: @color-mine-shaft;
+          .font-size(16);
+        }
+      }
+    }
+    .prices{
+      display: block;
+
+      @media @screen-tablet-and-desktop{
+        display: inline-block;
+        width: 33%;
+        height: 100%;
+        vertical-align: top;
+      }
+      @media @screen-desktop{
+        max-width: 220px;
+      }
+
+      p{
+        font-family: 'Gotham', sans-serif;
+        font-weight: 300;
+        color: @color-mine-shaft;
+        .font-size(14);
+        text-align: center;
+        margin: 5px 0;
+        &.price{
+          font-weight: 700;
+          span{
+            .font-size(26);
+          }
+        }
+        &.tag{
+          .font-size(13);
+          margin: 0 0 20px 0;
+          &.tarifa{
+            color: @color-lima;
+          }
+          &.cancelamento{
+            color: @color-flush-orange;
+          }
+        }
+      }
+      .button{
+        display: block;
+        max-width: 140px;
+        padding: 7px 5px;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-family: 'Gotham', sans-serif;
+        font-weight: 600;
+        .font-size(16);
+        margin: 15px auto;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        &.button-orange{
+          background-color: @color-flush-orange;
+          color: @color-white;
+        }
+      }
+    }
+  }
 }

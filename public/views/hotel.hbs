@@ -1,5 +1,4 @@
 {{#extend "stylesheets"}}
-    <link rel="stylesheet" href="/css/swiper.min.css">
     <link rel="stylesheet" href="/css/hotel.css">
 {{/extend}}
 
@@ -34,7 +33,7 @@
                 </select>
             </div>
             <div class="dailys">
-                <label for="dailys">N&order; de di&aacute;rias</label>
+                <label for="dailys">N&ordm; de di&aacute;rias</label>
                 <select name="dailys" id="dailys">
                     <option value="null">Escolha</option>
                     <option value="todas">Todas</option>
@@ -43,28 +42,26 @@
         </form>
     </div>
 
-    <hr>
     <div id="options">
         {{#each options}}
             <div class="option">
                 <div class="main-info">
                     <h2>{{this.title}}</h2>
                     <p>{{this.description}}</p>
-                </div>
-                <div class="departures-info">
+                </div><div class="departures-info">
                     <h3>Sa&iacute;das:</h3>
                     <ul>
                         {{#each from}}
                             <li>{{this}}</li>
                         {{/each}}
                     </ul>
-                </div>
-                <div class="package">
-                    <p>{{this.daily}}</p>
-                </div>
-                <div class="prices">
+                </div><div class="package">
+                    <p>{{this.daily}} <img src="/images/daily.png" alt="Diárias"><span>Di&aacute;rias</span></p>
+                    <p>1 <img src="/images/people.png" alt="Pessoas"> <span>Pessoa</span></p>
+                </div><div class="prices">
+                    <p class="tag">$ {{this.extras}}</p>
                     <p>Por apenas:</p>
-                    <p class="price">R$ <span>{{this.price}}</span></p>
+                    <p class="price">R$ <span>{{currency this.price}}</span></p>
                     <p>+ taxas em até 10x</p>
                     <a href="#" class="button button-orange">Quero ir</a>
                 </div>
@@ -74,6 +71,5 @@
 {{/each}}
 
 {{#extend "scripts"}}
-    <script src="/js/swiper.min.js"></script>
     <script src="/js/hotel.js"></script>
 {{/extend}}
