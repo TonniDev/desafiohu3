@@ -1,16 +1,79 @@
 {{#extend "stylesheets"}}
-
+    <link rel="stylesheet" href="/css/swiper.min.css">
+    <link rel="stylesheet" href="/css/hotel.css">
 {{/extend}}
 
 {{#each hotel}}
-    <div class="text">
-        <h2>{{title}}</h2>
+    <h1>{{title}}</h1>
+    <h2>{{location}}</h2>
+    <h3>{{description}}</h3>
+
+    <div class="photo-container">
+        <div class="photo" style="">
+        </div>
+        <div class="gallery-buttons prev-button"></div>
+        <div class="gallery-buttons next-button"></div>
+    </div>
+
+    <div class="gallery-thumbs">
         {{#each photos}}
-            <img src="/{{this}}" alt="">
+            <a href="/{{this}}" class="thumb">
+                <img src="/{{this}}" alt="{{title}}, {{location}}" title="{{title}}">
+            </a>
+        {{/each}}
+    </div>
+
+    <div class="filters">
+        <p>Escolha sua melhor op&ccedil;&atilde;o</p>
+        <form action="#" id="options-filter">
+            <div class="departures">
+                <label for="departures">Sa&iacute;das</label>
+                <select name="departures" id="departures">
+                    <option value="null">Escolha</option>
+                    <option value="todos">Todas</option>
+                </select>
+            </div>
+            <div class="dailys">
+                <label for="dailys">N&order; de di&aacute;rias</label>
+                <select name="dailys" id="dailys">
+                    <option value="null">Escolha</option>
+                    <option value="todas">Todas</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <hr>
+    <div id="options">
+        {{#each options}}
+            <div class="option">
+                <div class="main-info">
+                    <h2>{{this.title}}</h2>
+                    <p>{{this.description}}</p>
+                </div>
+                <div class="departures-info">
+                    <h3>Sa&iacute;das:</h3>
+                    <ul>
+                        {{#each from}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="package">
+                    <p>{{this.daily}}</p>
+                </div>
+                <div class="prices">
+                    <p>Por apenas:</p>
+                    <p class="price">R$ <span>{{this.price}}</span></p>
+                    <p>+ taxas em até 10x</p>
+                    <a href="#" class="button button-orange">Quero ir</a>
+                </div>
+            </div>
         {{/each}}
     </div>
 {{/each}}
 
 {{#extend "scripts"}}
-
+    <script src="/js/swiper.min.js"></script>
+    <script src="/js/hotel.js"></script>
 {{/extend}}
