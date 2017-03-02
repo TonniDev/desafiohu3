@@ -1,3 +1,13 @@
+__Para rodar o projeto__ 
+```
+$ npm install && npm start
+```
+
+__Para rodas os testes__
+```
+$ npm test
+```
+
 # Desafio Página Ofertas
 
 Neste problema você deve implementar a página de ofertas.
