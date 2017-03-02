@@ -29,14 +29,14 @@
                 <label for="departures">Sa&iacute;das</label>
                 <select name="departures" id="departures">
                     <option value="null">Escolha</option>
-                    <option value="todos">Todas</option>
+                    <option value="all">Todas</option>
                 </select>
             </div>
             <div class="dailys">
                 <label for="dailys">N&ordm; de di&aacute;rias</label>
                 <select name="dailys" id="dailys">
                     <option value="null">Escolha</option>
-                    <option value="todas">Todas</option>
+                    <option value="all">Todas</option>
                 </select>
             </div>
         </form>
@@ -50,7 +50,7 @@
                     <p>{{this.description}}</p>
                 </div><div class="departures-info">
                     <h3>Sa&iacute;das:</h3>
-                    <ul>
+                    <ul class="departures-list">
                         {{#each from}}
                             <li>{{this}}</li>
                         {{/each}}
@@ -67,8 +67,13 @@
                 </div>
             </div>
         {{/each}}
+        <span class="loader"></span>
     </div>
 {{/each}}
+
+<div id="warnings">
+    <p class="warning"></p>
+</div>
 
 {{#extend "scripts"}}
     <script src="/js/hotel.js"></script>

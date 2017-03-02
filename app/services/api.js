@@ -152,7 +152,6 @@ module.exports = function(){
             let cachedOptions = cached.options.get(cachedString);
 
             if(cachedOptions){
-                console.log('cached');
                 options = cachedOptions;
                 return options;
             }else{
@@ -169,10 +168,10 @@ module.exports = function(){
                         //...get its options
                         options = optionsList[i].options;
                         //If any search term is applied, filter options
-                        if (searchTerms.from) {
+                        if (searchTerms.from && searchTerms.from !== null) {
                             options = options.filter(departureFilter);
                         }
-                        if (searchTerms.daily) {
+                        if (searchTerms.daily && searchTerms.daily !== null) {
                             options = options.filter(dailyFilter);
                         }
                     }

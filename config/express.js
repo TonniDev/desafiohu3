@@ -24,7 +24,7 @@ handlebars = extend(handlebars);
 
 handlebars.registerHelper('currency', function(number){
     var val = number.toString();
-    return val.replace(/\B(?=(\d{3})+(?!\d))/g, ".");;
+    return val.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 });
 
 //Normalize port coming from number or string
